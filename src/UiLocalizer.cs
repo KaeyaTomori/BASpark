@@ -103,6 +103,7 @@ namespace BASpark
             w.BtnPickColor.Content = Localization.Get("Visual_ChangeColor");
 
             w.TxtFilterTitle.Text = Localization.Get("Filter_Title");
+            w.CheckHideInDrawingApps.Content = Localization.Get("Filter_DrawingApps");
             w.CheckEnvironmentFilter.Content = Localization.Get("Filter_Enable");
             w.CheckHideInFullscreen.Content = Localization.Get("Filter_Fullscreen");
             w.CheckShowEffectOnDesktop.Content = Localization.Get("Filter_Desktop");

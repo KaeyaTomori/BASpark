@@ -558,6 +558,7 @@ namespace BASpark
             CheckStartSilent.IsChecked = ConfigManager.StartSilent;
             CheckTelemetry.IsChecked = ConfigManager.EnableTelemetry;
             CheckAlwaysTrailEffectSwitch.IsChecked = ConfigManager.EnableAlwaysTrailEffect;
+            CheckHideInDrawingApps.IsChecked = ConfigManager.HideInDrawingApps;
             CheckEnvironmentFilter.IsChecked = ConfigManager.EnableEnvironmentFilter;
             CheckHideInFullscreen.IsChecked = ConfigManager.HideInFullscreen;
             CheckShowEffectOnDesktop.IsChecked = ConfigManager.ShowEffectOnDesktop;
@@ -1419,6 +1420,7 @@ namespace BASpark
             ApplyScrollbarSettings();
             ConfigManager.Save("NetworkRegion", selectedNetworkRegion);
             ConfigManager.Save("StartSilent", startSilentEnabled);
+            ConfigManager.Save("HideInDrawingApps", CheckHideInDrawingApps.IsChecked ?? false);
             ConfigManager.Save("EnableEnvironmentFilter", CheckEnvironmentFilter.IsChecked ?? false);
             ConfigManager.Save("HideInFullscreen", CheckHideInFullscreen.IsChecked ?? true);
             ConfigManager.Save("ShowEffectOnDesktop", CheckShowEffectOnDesktop.IsChecked ?? true);

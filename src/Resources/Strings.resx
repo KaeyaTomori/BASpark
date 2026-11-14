@@ -171,6 +171,9 @@
     <data name="Filter_Enable" xml:space="preserve">
       <value>启用智能环境探测</value>
     </data>
+    <data name="Filter_DrawingApps" xml:space="preserve">
+        <value>绘画软件中隐藏特效</value>
+    </data>
     <data name="Filter_Fullscreen" xml:space="preserve">
       <value>全屏应用前台运行时自动暂停</value>
     </data>

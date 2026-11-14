@@ -89,6 +89,8 @@ namespace BASpark
         private bool _isTouchLikeInput;
         private bool _isSuppressedByEnvironment;
         private long _suppressionCacheValidUntilTicks;
+        private IntPtr _drawingForegroundWindow;
+        private bool _isDrawingAppForeground;
         private IntPtr _lastForegroundWindow = IntPtr.Zero;
         private bool _disposed;
 
@@ -118,6 +120,17 @@ namespace BASpark
             "ScreenSketch.exe",
             "ScreenClippingHost.exe",
             "ms-screenclip.exe",
+        };
+
+        private static readonly HashSet<string> DrawingAppExecutables = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "sai.exe",
+            "sai2.exe",
+            "krita.exe",
+            "Photoshop.exe",
+            "CLIPStudioPaint.exe",
+            "FireAlpaca.exe",
+            "MediBangPaintPro.exe",
         };
 
         public void Start()
@@ -150,6 +163,7 @@ namespace BASpark
         public bool IsEffectSuppressedByEnvironment() => _isSuppressedByEnvironment;
         public void RefreshEnvironmentFilterState()
         {
+            _drawingForegroundWindow = IntPtr.Zero;
             _suppressionCacheValidUntilTicks = 0;
             _lastForegroundWindow = IntPtr.Zero;
             ShouldSuppressEffects(forceRefresh: true);
@@ -218,7 +232,8 @@ namespace BASpark
 
         private void SyncForegroundWinEventHook()
         {
-            bool needHook = ConfigManager.EnableEnvironmentFilter || ConfigManager.ScreenshotCompatibilityMode;
+            bool needHook = ConfigManager.EnableEnvironmentFilter || ConfigManager.HideInDrawingApps ||
+                            ConfigManager.ScreenshotCompatibilityMode;
             if (needHook)
             {
                 InstallForegroundWinEventHook();
@@ -288,7 +303,7 @@ namespace BASpark
                 return;
             }
 
-            if (ConfigManager.EnableEnvironmentFilter)
+            if (ConfigManager.EnableEnvironmentFilter || ConfigManager.HideInDrawingApps)
             {
                 _suppressionCacheValidUntilTicks = 0;
                 _lastForegroundWindow = IntPtr.Zero;
@@ -726,6 +741,24 @@ namespace BASpark
         private bool ShouldSuppressEffects(bool forceRefresh = false)
         {
             long nowTicks = DateTime.UtcNow.Ticks;
+            if (ConfigManager.HideInDrawingApps)
+            {
+                IntPtr foreground = GetForegroundWindow();
+                if (foreground != _drawingForegroundWindow || forceRefresh)
+                {
+                    _drawingForegroundWindow = foreground;
+                    _isDrawingAppForeground = TryGetForegroundProcessName(foreground, out string drawingProcess) &&
+                                              DrawingAppExecutables.Contains(drawingProcess);
+                    _suppressionCacheValidUntilTicks = 0;
+                }
+
+                if (_isDrawingAppForeground)
+                {
+                    UpdateSuppressionState(nowTicks, true);
+                    return true;
+                }
+            }
+
             if (!ConfigManager.EnableEnvironmentFilter)
             {
                 UpdateSuppressionState(nowTicks, false);

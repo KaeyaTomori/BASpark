@@ -625,6 +625,7 @@
                                                 <StackPanel>
                                                     <TextBlock x:Name="TxtFilterTitle" Text="环境过滤" FontSize="14" FontWeight="Bold" Foreground="#45AFFF" Margin="0,0,0,12"/>
 
+                                                    <CheckBox Name="CheckHideInDrawingApps" Content="绘画软件中隐藏特效" Style="{StaticResource ToggleSwitch}" Margin="0,0,0,10"/>
                                                     <CheckBox Name="CheckEnvironmentFilter" Content="启用智能环境探测" Style="{StaticResource ToggleSwitch}" Margin="0,0,0,10" Checked="EnvironmentFilterSetting_Changed" Unchecked="EnvironmentFilterSetting_Changed"/>
                                                     <CheckBox Name="CheckHideInFullscreen" Content="全屏应用前台运行时自动暂停" Style="{StaticResource ToggleSwitch}" Margin="0,0,0,10"/>
                                                     <CheckBox Name="CheckShowEffectOnDesktop" Content="在桌面上显示特效" Style="{StaticResource ToggleSwitch}" Margin="0,0,0,15"/>

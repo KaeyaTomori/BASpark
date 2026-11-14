@@ -171,6 +171,9 @@
     <data name="Filter_Enable" xml:space="preserve">
       <value>スマート環境検出を有効にする</value>
     </data>
+    <data name="Filter_DrawingApps" xml:space="preserve">
+        <value>描画ソフトでエフェクトを非表示にする</value>
+    </data>
     <data name="Filter_Fullscreen" xml:space="preserve">
       <value>全画面アプリが前面のとき自動一時停止</value>
     </data>

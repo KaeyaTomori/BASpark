@@ -81,6 +81,7 @@ namespace BASpark
         public static double ClickAnimationSpeed { get; set; } = 1.0;
         public static int TrailRefreshRate { get; set; } = 40;
         public static bool EnableEnvironmentFilter { get; set; } = false;
+        public static bool HideInDrawingApps { get; set; }
         public static bool HideInFullscreen { get; set; } = true;
         public static bool ShowEffectOnDesktop { get; set; } = true;
         public static string FilterProfiles { get; set; } = "";
@@ -143,6 +144,7 @@ namespace BASpark
                         ClickAnimationSpeed = Math.Clamp(Convert.ToDouble(key.GetValue("ClickAnimationSpeed", EffectSpeed), CultureInfo.InvariantCulture), 0.2, 3.0);
                         TrailRefreshRate = Math.Clamp(Convert.ToInt32(key.GetValue("TrailRefreshRate", 40), CultureInfo.InvariantCulture), 10, 240);
                         EnableEnvironmentFilter = Convert.ToBoolean(key.GetValue("EnableEnvironmentFilter", false));
+                        HideInDrawingApps = Convert.ToBoolean(key.GetValue("HideInDrawingApps", false));
                         HideInFullscreen = Convert.ToBoolean(key.GetValue("HideInFullscreen", true));
                         ShowEffectOnDesktop = Convert.ToBoolean(key.GetValue("ShowEffectOnDesktop", true));
                         IsTouchscreenMode = Convert.ToBoolean(key.GetValue("IsTouchscreenMode", false));
@@ -578,6 +580,7 @@ namespace BASpark
                     ClickAnimationSpeed = 1.0;
                     TrailRefreshRate = 40;
                     EnableEnvironmentFilter = false;
+                    HideInDrawingApps = false;
                     HideInFullscreen = true;
                     ShowEffectOnDesktop = true;
                     FilterProfiles = "";

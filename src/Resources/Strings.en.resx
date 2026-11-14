@@ -171,6 +171,9 @@
     <data name="Filter_Enable" xml:space="preserve">
       <value>Enable smart environment detection</value>
     </data>
+    <data name="Filter_DrawingApps" xml:space="preserve">
+        <value>Hide effects in drawing apps</value>
+    </data>
     <data name="Filter_Fullscreen" xml:space="preserve">
       <value>Pause when a fullscreen app is in foreground</value>
     </data>
